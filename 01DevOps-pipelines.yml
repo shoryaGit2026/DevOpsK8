@@ -17,7 +17,9 @@ stages:
      - bash: echo java --version
      - bash: echo mvn --version
      - bash: echo node --version
-     - bash: echo python --version
+     - bash: echo $(PipelineLevelVariable)
+     - bash: echo $(Build.BuildNumber)
+     - bash: echo $(Build.BuildId)
    - job: SecondJob
      steps:
       - bash: echo build SecondJob
