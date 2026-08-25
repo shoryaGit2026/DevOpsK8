@@ -17,6 +17,17 @@ steps:
   name: publickey
   inputs:
     secureFile: 'azure_rsa.pub'
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)\configuration\iaac\azure\kubernates'
+    commandOptions: '-var client_id=$(client_id) -var secret_id=$(secret_id)) -var ssh_public=$(publickey.secureFilePath)'
+    backendServiceArm: 'resourceManagerTest'
+    backendAzureRmResourceGroupName: 'azuretestrg'
+    backendAzureRmStorageAccountName: 'azuretestrg'
+    backendAzureRmContainerName: 'azuretestrg'
+    backendAzureRmKey: 'k82026'
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
